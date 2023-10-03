@@ -27,7 +27,7 @@ let keypressState = {
 
 function checkIfMatchDecrypt() {
     let ret = decryptComb.reduce((acc, key) => acc && keypressState[key], true);
-    console.log(ret);
+    //console.log(ret);
 
     Object.keys(keypressState).forEach(key => {
         if (keypressState[key] == true
@@ -40,7 +40,7 @@ function checkIfMatchDecrypt() {
 
 function checkIfMatchEncrypt() {
     let ret = encryptComb.reduce((acc, key) => acc && keypressState[key], true);
-    console.log(ret);
+    //console.log(ret);
 
     Object.keys(keypressState).forEach(key => {
         if (keypressState[key] == true
@@ -72,16 +72,16 @@ function getDeepestChild(element) {
 }
 
 function keyDownListener(e) {
-    console.log("asdasdasd")
+    //console.log("asdasdasd")
     if (!checkIfMatchKey(e.key)) return;
     keypressState[e.key] = true;
     // document.querySelector("#debug").textContent = JSON.stringify(keypressState);
     if (checkIfMatchDecrypt()) {
-        console.log("came");
+        //console.log("came");
         textNodesUnder(document.querySelector('body')).forEach(node => {
             if (node.textContent.includes(SYMBOL)) {
-                console.log(node.textContent, SYMBOL, node.textContent.replace(SYMBOL, ""), secret);
-                console.log(decrypt(node.textContent, secret))
+                //console.log(node.textContent, SYMBOL, node.textContent.replace(SYMBOL, ""), secret);
+                //console.log(decrypt(node.textContent, secret))
                 node.textContent = decrypt(node.textContent.replace(SYMBOL, ""), secret);
             }
         })
@@ -101,7 +101,7 @@ function keyDownListener(e) {
             selStartCopy = selStart;
             selEnd = sel.focusOffset;
 
-            console.log(dc.textContent.slice(0, selStart) + dc.textContent.slice(selEnd));
+            //console.log(dc.textContent.slice(0, selStart) + dc.textContent.slice(selEnd));
             intendedValue = SYMBOL + encrypt(dc.textContent.slice(0, selStart) + dc.textContent.slice(selEnd), secret);
             dc.textContent = intendedValue;
             elementToDispatchEventFrom = elementToDispatchEventFrom.parentElement;
@@ -136,7 +136,7 @@ var removeListeners = function () {
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     if (request.command === "set_secret") {
         secret = request.secret;
-        console.log(secret);
+        //console.log(secret);
     } else if (request.command === 'init') {
         addListeners();
     } else {
