@@ -5,7 +5,7 @@
     "version": "1",
     "author": "Nabil",
     "background": {
-      "scripts": ["background.js"],
+      "service_worker": ["background.js"],
       "persistent": true
     },
     "browser_action": {
